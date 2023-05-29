@@ -4,8 +4,6 @@ import cv2
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 mp_holistic = mp.solutions.holistic
-mp_pose = mp.solutions.pose
-mp_drawing = mp.solutions.drawing_utils
 
 # カメラの設定
 cap = cv2.VideoCapture(0)  # 0は内蔵カメラを指定する
@@ -25,7 +23,7 @@ with mp_pose.Pose(
         # 画像をRGBに変換する
         image = cv2.cvtColor(img_flipped, cv2.COLOR_BGR2RGB)
         
-        # 骨格検出を実行
+        # 骨格検出を行う
         results = pose.process(image)
 
         # 検出結果を表示する
