@@ -46,7 +46,7 @@ with mp_pose.Pose(
         nose_y = results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].y
 
         #座標を文字列に変換
-        sendstr = ",".join([str(nose_x),str(nose_y)])
+        sendstr = ",".join([str(round(nose_x,3)),str(round(nose_y,3))])
         
         #鼻の座標を送信
         client.sendto(sendstr.encode('utf-8'),(HOST,PORT))
