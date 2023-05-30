@@ -31,10 +31,9 @@ with mp_pose.Pose(
             img_flipped, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
         
         #鼻のx,y座標の表示
-        results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].x
-        results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].y
-        print("X: " + str(round(results.pose_landmarks.landmark[0].x,3)) + "  Y: " +
-             str(round(results.pose_landmarks.landmark[0].y,3)))
+        x = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].x
+        y = results.pose_landmarks.landmark[mp_holistic.PoseLandmark.NOSE].y
+        print("X: " + str(round(x,3)) + "  Y: " + str(round(y,3)))
         
         # 結果を表示する
         cv2.imshow('MediaPipe Pose', img_flipped)
