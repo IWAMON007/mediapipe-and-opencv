@@ -1,5 +1,5 @@
 import mediapipe as mp
-import cv2
+import cv2,time
 
 #ソケット通信（UDP/TCP）をするためのライブラリをインポート
 import socket
@@ -25,6 +25,9 @@ with mp_pose.Pose(
     min_tracking_confidence=0.5) as pose:
 
     while True:
+        #0.015秒待つ
+        time.sleep(0.015)
+
         # フレームを読み込む
         ret, frame = cap.read()
         
