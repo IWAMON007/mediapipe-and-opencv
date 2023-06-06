@@ -39,11 +39,21 @@ with mp_pose.Pose(
         
         # 骨格検出を実行
         results = pose.process(image)
+        
+        # 結果を表示する
+        cv2.imshow('MediaPipe Pose', img_flipped)
 
         # 検出結果を表示する
         mp_drawing.draw_landmarks(
             img_flipped, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
         
+        # ESCキーで終了する
+        if cv2.waitKey(1) == 27:
+            break
+        
+        #0.015秒待つ
+        time.sleep(0.015)
+
         #鼻のx,y座標を変数に格納
         nose_x = results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].x
         nose_y = results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].y
@@ -54,13 +64,10 @@ with mp_pose.Pose(
         #鼻の座標を送信
         client.sendto(sendstr.encode('utf-8'),(HOST,PORT))
 
-        # 結果を表示する
-        cv2.imshow('MediaPipe Pose', img_flipped)
         
         
-        # ESCキーで終了する
-        if cv2.waitKey(1) == 27:
-            break
+        
+        
     
     
     cap.release()
