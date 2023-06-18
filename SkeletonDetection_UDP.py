@@ -44,13 +44,16 @@ with mp_pose.Pose(
         mp_drawing.draw_landmarks(
             img_flipped, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
         
-        #鼻のx,y座標を変数に格納
+        #鼻のx,y座標を変数に格納（ブロックの移動用）
         nose_x = results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].x
         nose_y = results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE].y
-        r_hand = results.pose_landmarks.landmark[mp_pose.PoseLandmark.RIGHT_INDEX].x
+
+        #目じりのy座標（ブロックの回転用）
+        r_eye = results.pose_landmarks.landmark[mp_pose.PoseLandmark.RIGHT_EYE_OUTER].y
+        l_eye = results.pose_landmarks.landmark[mp_pose.PoseLandmark.LEFT_EYE_OUTER].y
 
         #座標を文字列に変換
-        sendstr = ",".join([str(round(nose_x,3)),str(round(nose_y,3)),str(round(r_hand,3))])
+        sendstr = ",".join([str(round(nose_x,3)),str(round(nose_y,3)),str(round(r_eye,3)),str(round(l_eye,3))])
         
         #鼻の座標を送信
         client.sendto(sendstr.encode('utf-8'),(HOST,PORT))
@@ -62,7 +65,7 @@ with mp_pose.Pose(
         # ESCキーで終了する
         if cv2.waitKey(1) == 27:
             break
-        print(str(round(r_hand,3)))
+        #print(str(round(r_hand,3)))
     
     
     cap.release()
