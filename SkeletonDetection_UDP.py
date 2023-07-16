@@ -53,7 +53,7 @@ with mp_pose.Pose(
         l_eye = results.pose_landmarks.landmark[mp_pose.PoseLandmark.LEFT_EYE_OUTER].y
 
         #座標を文字列に変換
-        sendstr = ",".join([str(round(nose_x,3)),str(round(nose_y,3)),str(round(r_eye,3)),str(round(l_eye,3))])
+        sendstr = ",".join([str(round(nose_x,3)),str(round(nose_y,3))])#,str(round(r_eye,3)),str(round(l_eye,3))])
         
         #鼻の座標を送信
         client.sendto(sendstr.encode('utf-8'),(HOST,PORT))
@@ -65,7 +65,7 @@ with mp_pose.Pose(
         # ESCキーで終了する
         if cv2.waitKey(1) == 27:
             break
-        #print(str(round(r_hand,3)))
+        #print(str(round(nose_x,3)))
     
     
     cap.release()
